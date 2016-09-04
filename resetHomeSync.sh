@@ -85,6 +85,7 @@ if [[ ! -z $1 ]]; then
 	# Correction des droits
 	echo ""
 	echo "Correction des permissions du dossier utilisateur : "
+	echo "Merci de patienter. Le processus peut mettre quelques minutes à s'exécuter..."
 	if [[ ${SystemOSMajor} -eq 10 && ${SystemOSMinor} -ge 11 ]] || [[ ${SystemOSMajor} -gt 10 ]]; then
 		if [[ ${userName%/} == "Shared" ]]; then
 	        chmod -R 777 /Users/${userName%/}
