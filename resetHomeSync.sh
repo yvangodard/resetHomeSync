@@ -115,7 +115,7 @@ if [[ ! -z $1 ]]; then
 	        [ -d /Users/${userName%/}/Public/Drop\ Box ] && chmod -R 733 /Users/${userName%/}/Public/Drop\ Box/
 	        [ -d /Users/${userName%/}/Sites ] && chmod -R 755 /Users/${userName%/}/Sites/
 	        ls /Users/${userName%/}/Sites/* > /dev/null 2>&1
-			[ $? -eq 0 ] && chmod -R 644 /Users/${userName%/}/Sites/*
+	        [ $? -eq 0 ] && chmod -R 644 /Users/${userName%/}/Sites/*
 	        [ -d /Users/${userName%/}/Sites/images ] && chmod -R 755 /Users/${userName%/}/Sites/images
 	    fi
 	fi
