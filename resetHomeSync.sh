@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Variables initialisation
 version="resetHomeSync v1.2 - 2016, Yvan Godard [godardyvan@gmail.com]"
@@ -114,7 +114,13 @@ if [[ ! -z $1 ]]; then
 	        chmod -R 755 /Users/${userName%/}/Sites/images/
 	    fi
 	fi
-	echo "" && echo "Fin du processus."
+	echo "" && echo "Fin du processus." && echo "Il est conseillé de rebooter maintenant."
+	read -p "Rebooter maintenant (y/n) ?" choice
+	case "$choice" in 
+		oui|Oui|OUI|o|O|y|Y|Yes|yes|YES ) echo "yes" && shutdown -r now ;;
+		non|Non|NON|n|N|No|NO|no ) echo "no";;
+		* ) echo "réponse invalide.";;
+	esac
 else
 	echo "Vous devez entrer le nom du compte utilisateur en paramètre \$1."
 	echo "Par exemple : ${scriptDir%/}/${scriptName} c.toto"
