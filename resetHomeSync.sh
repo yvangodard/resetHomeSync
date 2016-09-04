@@ -60,28 +60,31 @@ if [[ ! -z $1 ]]; then
 	echo " "
 	# Suppression des fichiers
 	echo "Suppression des fichiers et dossiers suivants : "
-	[[ -e ${dirUser}/.FileSync ]] && echo "   - ${dirUser}/.FileSync" && rm -R ${dirUser}/.FileSync
-	[[ -e ${dirUser}/Library/FileSync ]] && echo "   - ${dirUser}/Library/FileSync" && rm -R ${dirUser}/Library/FileSync
+	nbDeletedFiles=0
+	[[ -e ${dirUser}/.FileSync ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/.FileSync" && rm -R ${dirUser}/.FileSync
+	[[ -e ${dirUser}/Library/FileSync ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/Library/FileSync" && rm -R ${dirUser}/Library/FileSync
 	ls ${dirUser}/Library/Logs/FileSync*  > /dev/null 2>&1
-	[ $? -eq 0 ] && echo "   - ${dirUser}/Library/Logs/FileSync*" && rm -R ${dirUser}/Library/Logs/FileSync*
-	[[ -e ${dirUser}/Library/Application\ Support/SyncServices ]] && echo "   - ${dirUser}/Library/Application Support/SyncServices" && rm -R ${dirUser}/Library/Application\ Support/SyncServices
-	[[ -e ${dirUser}/Library/Application\ Support/MobileSync ]] && echo "   - ${dirUser}/Library/Application Support/MobileSync" && rm -R ${dirUser}/Library/Application\ Support/MobileSync
+	[ $? -eq 0 ] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/Library/Logs/FileSync*" && rm -R ${dirUser}/Library/Logs/FileSync*
+	[[ -e ${dirUser}/Library/Application\ Support/SyncServices ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/Library/Application Support/SyncServices" && rm -R ${dirUser}/Library/Application\ Support/SyncServices
+	[[ -e ${dirUser}/Library/Application\ Support/MobileSync ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/Library/Application Support/MobileSync" && rm -R ${dirUser}/Library/Application\ Support/MobileSync
 	ls ${dirUser}/Library/Preferences/ByHost/com.apple.syncservices.*.plist > /dev/null 2>&1
-	[ $? -eq 0 ] && echo "   - ${dirUser}/Library/Preferences/ByHost/com.apple.syncservices.*.plist" && rm -R ${dirUser}/Library/Preferences/ByHost/com.apple.syncservices.*.plist
-	[[ -e ${dirUser}/Library/Preferences/com.apple.homeSync.plist ]] && echo "   - ${dirUser}/Library/Preferences/com.apple.homeSync.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.homeSync.plist
-	[[ -e ${dirUser}/Library/Preferences/com.apple.MCX.plist ]] && echo "   - ${dirUser}/Library/Preferences/com.apple.MCX.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.MCX.plist
-	[[ -e ${dirUser}/Library/Preferences/com.apple.FileSyncUI.plist ]] && echo "   - ${dirUser}/Library/Preferences/com.apple.FileSyncUI.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.FileSyncUI.plist
-	[[ -e ${dirUser}/Library/Preferences/com.apple.MirrorAgent.plist ]] && echo "   - ${dirUser}/Library/Preferences/com.apple.MirrorAgent.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.MirrorAgent.plist
-	[[ -e ${dirUser}/Library/Preferences/com.apple.PreferenceSync.plist ]] && echo "   - ${dirUser}/Library/Preferences/com.apple.PreferenceSync.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.PreferenceSync.plist
-	[[ -e ${dirUser}/Library/Preferences/com.apple.FileSyncAgent.plist ]] && echo "   - ${dirUser}/Library/Preferences/com.apple.FileSyncAgent.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.FileSyncAgent.plist
+	[ $? -eq 0 ] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/Library/Preferences/ByHost/com.apple.syncservices.*.plist" && rm -R ${dirUser}/Library/Preferences/ByHost/com.apple.syncservices.*.plist
+	[[ -e ${dirUser}/Library/Preferences/com.apple.homeSync.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/Library/Preferences/com.apple.homeSync.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.homeSync.plist
+	[[ -e ${dirUser}/Library/Preferences/com.apple.MCX.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/Library/Preferences/com.apple.MCX.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.MCX.plist
+	[[ -e ${dirUser}/Library/Preferences/com.apple.FileSyncUI.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/Library/Preferences/com.apple.FileSyncUI.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.FileSyncUI.plist
+	[[ -e ${dirUser}/Library/Preferences/com.apple.MirrorAgent.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/Library/Preferences/com.apple.MirrorAgent.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.MirrorAgent.plist
+	[[ -e ${dirUser}/Library/Preferences/com.apple.PreferenceSync.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/Library/Preferences/com.apple.PreferenceSync.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.PreferenceSync.plist
+	[[ -e ${dirUser}/Library/Preferences/com.apple.FileSyncAgent.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - ${dirUser}/Library/Preferences/com.apple.FileSyncAgent.plist" && rm -R ${dirUser}/Library/Preferences/com.apple.FileSyncAgent.plist
 	ls /Library/Managed\ Preferences/${userName%/}/com.apple.syncservices.*.plist > /dev/null 2>&1
-	[ $? -eq 0 ] && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.syncservices.*.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.syncservices.*.plist
-	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.homeSync.plist ]] && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.homeSync.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.homeSync.plist
-	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.MCX.plist ]] && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.MCX.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.MCX.plist
-	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.FileSyncUI.plist ]] && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.FileSyncUI.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.FileSyncUI.plist
-	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.MirrorAgent.plist ]] && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.MirrorAgent.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.MirrorAgent.plist
-	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.PreferenceSync.plist ]] && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.PreferenceSync.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.PreferenceSync.plist
-	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.FileSyncAgent.plist ]] && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.FileSyncAgent.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.FileSyncAgent.plist
+	[ $? -eq 0 ] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.syncservices.*.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.syncservices.*.plist
+	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.homeSync.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.homeSync.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.homeSync.plist
+	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.MCX.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.MCX.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.MCX.plist
+	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.FileSyncUI.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.FileSyncUI.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.FileSyncUI.plist
+	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.MirrorAgent.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.MirrorAgent.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.MirrorAgent.plist
+	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.PreferenceSync.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.PreferenceSync.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.PreferenceSync.plist
+	[[ -e /Library/Managed\ Preferences/${userName%/}/com.apple.FileSyncAgent.plist ]] && let nbDeletedFiles=$nbDeletedFiles+1 && echo "   - /Library/Managed Preferences/${userName%/}/com.apple.FileSyncAgent.plist" && rm -R /Library/Managed\ Preferences/${userName%/}/com.apple.FileSyncAgent.plist
+	[[ ${nbDeletedFiles} -eq 0 ]] && echo "   - Aucun fichier à supprimer trouvé"
+
 	# Correction des droits
 	echo ""
 	echo "Correction des permissions du dossier utilisateur : "
