@@ -114,7 +114,7 @@ if [[ ! -z $1 ]]; then
 	        chmod -R 755 /Users/${userName%/}/Sites/images/
 	    fi
 	fi
-	echo "" && echo "Fin du processus." && echo "Il est conseillé de rebooter maintenant."
+	echo "" && echo "Fin du processus." && echo "" && echo "Il est conseillé de rebooter maintenant."
 	read -p "Rebooter maintenant (y/n) ? " choice
 	case "$choice" in 
 		oui|Oui|OUI|o|O|y|Y|Yes|yes|YES ) echo "Nous rebootons dans 1 minute, fermez vos applications et sauvegardez vos documents ouverts." && sleep 60 && shutdown -r now ;;
