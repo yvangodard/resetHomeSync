@@ -115,11 +115,11 @@ if [[ ! -z $1 ]]; then
 	    fi
 	fi
 	echo "" && echo "Fin du processus." && echo "Il est conseillé de rebooter maintenant."
-	read -p "Rebooter maintenant (y/n) ?" choice
+	read -p "Rebooter maintenant (y/n) ? " choice
 	case "$choice" in 
-		oui|Oui|OUI|o|O|y|Y|Yes|yes|YES ) echo "yes" && shutdown -r now ;;
-		non|Non|NON|n|N|No|NO|no ) echo "no";;
-		* ) echo "réponse invalide.";;
+		oui|Oui|OUI|o|O|y|Y|Yes|yes|YES ) echo "Nous rebootons dans 1 minute, fermez vos applications et sauvegardez vos documents ouverts." && sleep 60 && shutdown -r now ;;
+		non|Non|NON|n|N|No|NO|no ) echo "";;
+		* ) echo "Réponse invalide, nous ne rebootons pas.";;
 	esac
 else
 	echo "Vous devez entrer le nom du compte utilisateur en paramètre \$1."
